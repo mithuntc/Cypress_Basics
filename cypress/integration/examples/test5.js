@@ -8,7 +8,7 @@ describe('Handle Child windows Test Suite', function () {
         cy.origin('https://www.qaclickacademy.com', () => {
             cy.get("#navbarSupportedContent a[href*='about']").click(); //clicking on the about link
             //asserting the URL contains 'about'
-            cy.get('.page-banner-cont h2').should('have.text', 'About Us'); //asserting the heading text  
+            cy.get('.page-banner-cont h2').should('have.text', 'About Us'); //asserting the heading text   
         })
     });
 })
