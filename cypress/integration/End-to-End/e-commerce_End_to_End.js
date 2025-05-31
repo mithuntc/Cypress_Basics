@@ -43,6 +43,7 @@ describe('E-commerce End to End Test Suite', function () {
         cy.get('button.btn.btn-success').click();
         //place contry name
         cy.get('#country').type('India');
+        //cy.config('defaultCommandTimeout', 10000); // increase timeout for country input
         cy.wait(2000); // wait for suggestions to load
         cy.get('.suggestions ul li a').contains('India').click();
         //submit order
