@@ -1,11 +1,17 @@
 /// <reference types="cypress" />
 describe('E-commerce End to End Test Suite', function () {
+    before(() => {
+        // This will run once before all tests in this block
+         cy.fixture('example.json').then((data) => {
+          this.data = data; // Get the product name from the fixture
+        });
+    });
     it('End to End testing', () => {
-        const productName = 'Nokia Edge';
+        // Initialize sum variable to calculate total price of products
         let sum = 0;
         cy.visit('https://rahulshettyacademy.com/loginpagePractise/');
-        cy.get('#username').type('rahulshettyacademy');
-        cy.get('#password').type('learning');
+        cy.get('#username').type(this.data.username);
+        cy.get('#password').type(this.data.password);
         //radio button admin or user
         cy.get('input[value="admin"]').check();
         //select dropdown
@@ -17,7 +23,7 @@ describe('E-commerce End to End Test Suite', function () {
         cy.contains('Shop Name').should('be.visible');
         cy.get('app-card').should('have.length', 4);// count of cards
         // search for product and add to cart
-        cy.get('app-card').filter(':contains("'+productName+'")').as('nokiaCard').then(() => {
+        cy.get('app-card').filter(':contains("'+this.data.productName+'")').as('nokiaCard').then(() => {
             //assert that the product is visible
             cy.get('@nokiaCard').should('be.visible');
             cy.get('@nokiaCard').find('button').click();
@@ -25,7 +31,7 @@ describe('E-commerce End to End Test Suite', function () {
         //check out
         cy.get('a.nav-link.btn.btn-primary').click();
         //assert that the product is in the cart
-        cy.get('h4').should('contain', productName);
+        cy.get('h4').should('contain', this.data.productName);
         // price check cannot exceed 100000 fro nokia edge from the table
         cy.get('tr td:nth-child(4) strong').each(($el) => {
             const price = Number($el.text().split(" ")[1].trim());
