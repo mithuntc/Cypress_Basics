@@ -12,7 +12,7 @@ Introduction to test retries and wait mechanisms
 ▶️ How to Run
 Clone the repo:
 
-git clone https://github.com/yourusername/Cypress_Basics.git
+git clone https://github.com/mithuntc/Cypress_Basics.git
 cd Cypress_Basics
 npm install
 
